@@ -72,9 +72,8 @@ export default function IntroductionPage() {
                 <code className="px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-900/50 text-xs font-mono">
                   @maplibre/maplibre-react-native@11.0.0-alpha.28
                 </code>
-                , which is currently in alpha. Version 11 includes significant
-                improvements and bug fixes. The API is stable but the package is not
-                yet officially released.
+                , which is currently in alpha. Version 11 is used due to its support for the new architecture.
+                Breaking changes may arise.
               </p>
             </div>
           </div>

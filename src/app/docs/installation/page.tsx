@@ -87,9 +87,8 @@ export default function InstallationPage() {
       <DocsNote>
         <strong>Alpha Version:</strong> This library requires{" "}
         <DocsCode>@maplibre/maplibre-react-native@11.0.0-alpha.28</DocsCode>,
-        which is currently in alpha. Version 11 includes significant improvements
-        and bug fixes. The API is stable but the package is not yet officially
-        released.
+        which is currently in alpha. Version 11 is used due to its support for the new architecture.
+        Breaking changes may arise.
       </DocsNote>
 
       <DocsSection title="Prerequisites">
