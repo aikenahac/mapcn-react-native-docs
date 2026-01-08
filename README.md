@@ -86,14 +86,6 @@ public/
 └── maps/               # Built registry (generated)
 ```
 
-## Technologies
-
-- **Framework**: Next.js 16 (App Router)
-- **Styling**: Tailwind CSS v4
-- **Syntax Highlighting**: Shiki
-- **Component Distribution**: shadcn CLI-compatible registry
-- **Analytics**: Vercel Analytics
-
 ## Contributing
 
 Contributions welcome! The main areas for contribution:
