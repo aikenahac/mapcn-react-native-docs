@@ -95,6 +95,8 @@ Contributions welcome! The main areas for contribution:
 - Adding new usage examples
 - Fixing typos or clarifying instructions
 
+#### Inspired by [mapcn](https://mapcn.dev)
+
 ## License
 
 MIT
