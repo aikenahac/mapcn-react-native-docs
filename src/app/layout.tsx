@@ -102,6 +102,9 @@ export default function RootLayout({
       className={`${geist.variable} ${geistMono.variable}`}
       suppressHydrationWarning
     >
+      <head>
+        <script defer data-domain="mapcn-rn.aiken.si" src="https://plausible.aerio.cloud/js/script.outbound-links.js"></script>
+      </head>
       <body className="font-sans antialiased">
         <ThemeProvider>
           {children}
