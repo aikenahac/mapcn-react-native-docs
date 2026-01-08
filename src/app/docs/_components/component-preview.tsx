@@ -1,0 +1,26 @@
+import { highlightCode } from "@/lib/highlight";
+import { ComponentPreviewClient } from "./component-preview-client";
+
+interface ComponentPreviewProps {
+  children?: React.ReactNode; // Kept for compatibility but unused
+  code: string;
+  className?: string;
+  screenshotName?: string; // Name of screenshot file in /public/screenshots/
+}
+
+export async function ComponentPreview({
+  code,
+  className,
+  screenshotName,
+}: ComponentPreviewProps) {
+  const highlightedCode = await highlightCode(code, "tsx");
+
+  return (
+    <ComponentPreviewClient
+      code={code}
+      highlightedCode={highlightedCode}
+      className={className}
+      screenshotName={screenshotName}
+    />
+  );
+}

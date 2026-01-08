@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "mapcn-react-native",
+  "homepage": "https://github.com/aikenahac/mapcn-react-native",
+  "items": [
+    {
+      "name": "map",
+      "type": "registry:ui",
+      "title": "Map (React Native)",
+      "description": "A MapLibre-powered map component for React Native with markers, popups, labels, routes, and controls.",
+      "dependencies": ["@maplibre/maplibre-react-native@11.0.0-alpha.28", "expo-location@^19.0.8"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/registry/map.txt",
+          "type": "registry:ui",
+          "target": "components/ui/map.tsx"
+        }
+      ]
+    }
+  ]
+}
