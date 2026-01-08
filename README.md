@@ -19,8 +19,8 @@ This Next.js site documents the React Native version of mapcn. Since React Nativ
 ## Development
 
 ```bash
-npm install
-npm run dev
+pnpm install
+pnpm dev
 ```
 
 Visit http://localhost:3000
@@ -28,8 +28,8 @@ Visit http://localhost:3000
 ## Building
 
 ```bash
-npm run build
-npm run start
+pnpm build
+pnpm start
 ```
 
 ## Registry System
@@ -37,7 +37,7 @@ npm run start
 Build the component registry for shadcn CLI distribution:
 
 ```bash
-npm run registry:build
+pnpm registry:build
 ```
 
 This outputs to `public/maps/map.json` for the shadcn CLI.
