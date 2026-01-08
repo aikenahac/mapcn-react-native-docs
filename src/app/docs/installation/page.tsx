@@ -8,9 +8,7 @@ import {
 import { CodeBlock } from "../_components/code-block";
 import { Metadata } from "next";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "site-url-here";
-
-const installMapCode = `npx shadcn@latest add ${siteUrl}/maps/map.json`;
+const installMapCode = `npx @react-native-reusables/cli@latest add https://mapcn-rn.aiken.si/maps/map.json`;
 
 const installDepsCode = `npx expo install @maplibre/maplibre-react-native@11.0.0-alpha.28 expo-location`;
 

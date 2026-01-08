@@ -25,7 +25,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 The React Native map component (`src/registry/map.tsx`) is the single source of truth, copied from the mapcn-react-native package. This 650-line file exports: `Map`, `MapMarker`, `MarkerContent`, `MarkerPopup`, `MarkerLabel`, `MapControls`, `MapRoute`, `MapUserLocation`, `useMap`, `useCurrentPosition`, and `LocationManager`.
 
-The component is designed to be installed via shadcn CLI and distributed through a registry system defined in `registry.json`. When users run `npx shadcn add`, they pull from the built registry in `public/maps/`.
+The component is designed to be installed via shadcn CLI and distributed through a registry system defined in `registry.json`. When users run `npx @react-native-reusables/cli@latest add`, they pull from the built registry in `public/maps/`.
 
 ### Documentation Structure
 
