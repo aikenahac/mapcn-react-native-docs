@@ -13,6 +13,7 @@ import {
   Wrench,
   Settings,
   Layers,
+  Smartphone,
 } from "lucide-react";
 
 import {
@@ -38,6 +39,11 @@ const navigation = [
         title: "API Reference",
         href: "/docs/api-reference",
         icon: Braces,
+      },
+      {
+        title: "Companion App",
+        href: "/docs/companion",
+        icon: Smartphone,
       },
     ],
   },

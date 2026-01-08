@@ -91,6 +91,7 @@ export default function AdvancedPage() {
       <ComponentPreview
         code={advancedSource}
         screenshotName="advanced-usage.png"
+        qrCodeName="advanced-usage.png"
       />
 
       <DocsSection title="Example: Custom GeoJSON Layer">
@@ -103,6 +104,7 @@ export default function AdvancedPage() {
       <ComponentPreview
         code={customLayerSource}
         screenshotName="custom-layer.png"
+        qrCodeName="custom-layer.png"
       />
 
       <DocsSection title="Example: Markers via Layers">
@@ -116,6 +118,7 @@ export default function AdvancedPage() {
       <ComponentPreview
         code={layerMarkersSource}
         screenshotName="layer-markers.png"
+        qrCodeName="layer-markers.png"
       />
 
       <DocsSection title="Extend to Build">

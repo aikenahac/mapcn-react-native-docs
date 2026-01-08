@@ -14,7 +14,7 @@ export default function BasicMapPage() {
     <DocsLayout
       title="Basic Map"
       description="The simplest way to add a map to your React Native application."
-      prev={{ title: "API Reference", href: "/docs/api-reference" }}
+      prev={{ title: "Companion App", href: "/docs/companion" }}
       next={{ title: "Map Controls", href: "/docs/controls" }}
     >
       <DocsSection>
@@ -26,7 +26,7 @@ export default function BasicMapPage() {
         </p>
       </DocsSection>
 
-      <ComponentPreview code={basicMapSource} screenshotName="basic-map.png" />
+      <ComponentPreview code={basicMapSource} screenshotName="basic-map.png" qrCodeName="basic-map.png" />
     </DocsLayout>
   );
 }

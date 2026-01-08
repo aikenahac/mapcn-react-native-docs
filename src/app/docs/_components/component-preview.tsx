@@ -6,12 +6,14 @@ interface ComponentPreviewProps {
   code: string;
   className?: string;
   screenshotName?: string; // Name of screenshot file in /public/screenshots/
+  qrCodeName?: string; // Name of QR code file in /public/qr/
 }
 
 export async function ComponentPreview({
   code,
   className,
   screenshotName,
+  qrCodeName,
 }: ComponentPreviewProps) {
   const highlightedCode = await highlightCode(code, "tsx");
 
@@ -21,6 +23,7 @@ export async function ComponentPreview({
       highlightedCode={highlightedCode}
       className={className}
       screenshotName={screenshotName}
+      qrCodeName={qrCodeName}
     />
   );
 }

@@ -34,7 +34,7 @@ export default function ControlsPage() {
         handling.
       </DocsNote>
 
-      <ComponentPreview code={controlsSource} screenshotName="map-controls.png" />
+      <ComponentPreview code={controlsSource} screenshotName="map-controls.png" qrCodeName="map-controls.png" />
 
       <DocsSection title="User Location">
         <p>

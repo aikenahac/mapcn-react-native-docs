@@ -36,7 +36,7 @@ export default function RoutesPage() {
         <p>Draw a route with numbered stop markers along the path.</p>
       </DocsSection>
 
-      <ComponentPreview code={routeSource} screenshotName="route.png" />
+      <ComponentPreview code={routeSource} screenshotName="route.png" qrCodeName="route.png" />
 
       <DocsSection title="Route Planning">
         <p>
@@ -52,6 +52,7 @@ export default function RoutesPage() {
       <ComponentPreview
         code={osrmRouteSource}
         screenshotName="osrm-route.png"
+        qrCodeName="osrm-route.png"
         className="h-[500px]"
       />
     </DocsLayout>

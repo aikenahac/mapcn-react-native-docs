@@ -53,7 +53,7 @@ export default function MarkersPage() {
         </p>
       </DocsSection>
 
-      <ComponentPreview code={markersSource} screenshotName="markers.png" />
+      <ComponentPreview code={markersSource} screenshotName="markers.png" qrCodeName="markers.png" />
 
       <DocsSection title="Rich Popups">
         <p>
@@ -65,6 +65,7 @@ export default function MarkersPage() {
       <ComponentPreview
         code={popupSource}
         screenshotName="popup.png"
+        qrCodeName="popup.png"
         className="h-[500px]"
       />
     </DocsLayout>

@@ -37,7 +37,7 @@ export default function ApiReferencePage() {
       title="API Reference"
       description="Complete reference for all React Native map components and their props."
       prev={{ title: "Installation", href: "/docs/installation" }}
-      next={{ title: "Basic Map", href: "/docs/basic-map" }}
+      next={{ title: "Companion App", href: "/docs/companion" }}
     >
       <DocsNote>
         <strong>Note:</strong> This library is built on top of{" "}

@@ -97,8 +97,7 @@ export default function InstallationPage() {
           <DocsLink href="https://expo.dev" external>
             Expo
           </DocsLink>{" "}
-          or bare React Native. This component library works best with Expo and
-          optionally{" "}
+          or bare React Native. This component library works best with Expo and requires{" "}
           <DocsLink href="https://www.nativewind.dev/" external>
             NativeWind
           </DocsLink>{" "}

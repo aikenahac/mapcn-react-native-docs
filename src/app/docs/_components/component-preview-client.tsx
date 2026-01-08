@@ -11,6 +11,7 @@ interface ComponentPreviewClientProps {
   highlightedCode: string;
   className?: string;
   screenshotName?: string; // Name of screenshot file in /public/screenshots/
+  qrCodeName?: string; // Name of QR code file in /public/qr/
 }
 
 export function ComponentPreviewClient({
@@ -18,8 +19,9 @@ export function ComponentPreviewClient({
   highlightedCode,
   className,
   screenshotName,
+  qrCodeName,
 }: ComponentPreviewClientProps) {
-  const [activeTab, setActiveTab] = useState<"preview" | "code">("preview");
+  const [activeTab, setActiveTab] = useState<"preview" | "code" | "qr">("preview");
 
   return (
     <div className="w-full rounded-lg border overflow-hidden">
@@ -47,6 +49,19 @@ export function ComponentPreviewClient({
           >
             Code
           </button>
+          {qrCodeName && (
+            <button
+              onClick={() => setActiveTab("qr")}
+              className={cn(
+                "px-3 py-1 text-xs font-medium rounded transition-colors",
+                activeTab === "qr"
+                  ? "text-foreground bg-muted dark:bg-muted/80"
+                  : "text-muted-foreground hover:text-foreground hover:bg-muted dark:hover:bg-muted/80"
+              )}
+            >
+              App Preview
+            </button>
+          )}
         </div>
 
         <CopyButton text={code} />
@@ -70,11 +85,32 @@ export function ComponentPreviewClient({
               </p>
             )}
           </div>
-        ) : (
+        ) : activeTab === "code" ? (
           <div
             className="h-full p-4 overflow-auto text-sm bg-muted/20 [&_pre]:bg-transparent! [&_code]:bg-transparent!"
             dangerouslySetInnerHTML={{ __html: highlightedCode }}
           />
+        ) : (
+          <div className="h-full bg-muted/10 flex items-center justify-center p-8">
+            {qrCodeName ? (
+              <div className="flex flex-col items-center gap-4">
+                <Image
+                  src={`/qr/${qrCodeName}`}
+                  alt="QR code to example"
+                  width={300}
+                  height={300}
+                  className="rounded-lg border bg-white p-4"
+                />
+                <p className="text-sm text-muted-foreground">
+                  Scan to view this example in the <a href="/docs/companion" className="underline">companion app</a>
+                </p>
+              </div>
+            ) : (
+              <p className="text-muted-foreground text-sm">
+                QR code not available
+              </p>
+            )}
+          </div>
         )}
       </div>
     </div>
