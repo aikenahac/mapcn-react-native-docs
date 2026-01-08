@@ -1,4 +1,6 @@
-import { DocsLayout, DocsSection, DocsCode, DocsNote, DocsLink } from "../_components/docs";
+import { DocsLayout, DocsSection, DocsCode, DocsNote } from "../_components/docs";
+import { ComponentPreview } from "../_components/component-preview";
+import { getExampleSource } from "@/lib/get-example-source";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -6,6 +8,8 @@ export const metadata: Metadata = {
 };
 
 export default function PopupsPage() {
+  const popupSource = getExampleSource("popup-example");
+
   return (
     <DocsLayout
       title="Popups"
@@ -29,59 +33,20 @@ export default function PopupsPage() {
         <DocsCode>MarkerPopup</DocsCode>.
       </DocsNote>
 
-      <DocsSection title="Basic Popup">
-        <p>A simple popup with text content:</p>
-        <pre className="mt-4 p-4 rounded-lg bg-muted text-sm overflow-x-auto">
-          <code>{`<MapMarker coordinate={[-122.4194, 37.7749]}>
-  <MarkerContent>
-    <View style={styles.marker} />
-  </MarkerContent>
-  <MarkerPopup title="San Francisco">
-    <Text>The cultural and commercial center</Text>
-    <Text>of Northern California</Text>
-  </MarkerPopup>
-</MapMarker>`}</code>
-        </pre>
-      </DocsSection>
-
       <DocsSection title="Rich Popups">
         <p>
-          Build complex popups with images, buttons, and styled components:
+          Build complex popups with React Native components like View, Text,
+          Image, and Pressable for interactive elements. Press a marker to see
+          the popup with detailed information and actions.
         </p>
-        <pre className="mt-4 p-4 rounded-lg bg-muted text-sm overflow-x-auto">
-          <code>{`<MapMarker coordinate={[-122.4194, 37.7749]}>
-  <MarkerContent>
-    <View style={styles.marker} />
-  </MarkerContent>
-  <MarkerPopup style={styles.popup}>
-    <Image
-      source={{ uri: 'https://example.com/image.jpg' }}
-      style={styles.image}
-    />
-    <Text style={styles.title}>Golden Gate Bridge</Text>
-    <Text style={styles.description}>
-      Iconic suspension bridge and landmark
-    </Text>
-    <Pressable
-      style={styles.button}
-      onPress={() => console.log('Get directions')}
-    >
-      <Text style={styles.buttonText}>Get Directions</Text>
-    </Pressable>
-  </MarkerPopup>
-</MapMarker>`}</code>
-        </pre>
       </DocsSection>
 
-      <DocsSection title="Example">
-        <p>
-          For a complete example with styled popups, see the{" "}
-          <DocsLink href="/docs/markers#rich-popups">
-            Markers documentation
-          </DocsLink>
-          .
-        </p>
-      </DocsSection>
+      <ComponentPreview
+        code={popupSource}
+        screenshotName="popup.png"
+        qrCodeName="popup.png"
+        className="h-[500px]"
+      />
     </DocsLayout>
   );
 }
