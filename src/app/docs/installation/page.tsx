@@ -53,24 +53,16 @@ const setupPermissionsAndroid = `<!-- android/app/src/main/AndroidManifest.xml -
 <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />`;
 
-const usageCode = `import { Map, MapControls } from "@/components/ui/map";
-import { View, StyleSheet } from "react-native";
+const usageCode = `import { Map } from "@/components/ui/map";
+import { View } from "react-native";
 
-export function MyMapScreen() {
+export default function BasicMapExample() {
   return (
-    <View style={styles.container}>
-      <Map center={[-74.006, 40.7128]} zoom={11}>
-        <MapControls />
-      </Map>
+    <View className="h-[500px] rounded-xl overflow-hidden border border-border">
+      <Map zoom={12} center={[-122.4194, 37.7749]} />
     </View>
   );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});`;
+}`;
 
 export const metadata: Metadata = {
   title: "Installation",
@@ -89,6 +81,21 @@ export default function InstallationPage() {
         <DocsCode>@maplibre/maplibre-react-native@11.0.0-alpha.28</DocsCode>,
         which is currently in alpha. Version 11 is used due to its support for the new architecture.
         Breaking changes may arise.
+      </DocsNote>
+
+      <DocsNote>
+        <strong>Expo Development Client:</strong> MapLibre React Native requires
+        a{" "}
+        <DocsLink
+          href="https://docs.expo.dev/develop/development-builds/introduction/"
+          external
+        >
+          development build
+        </DocsLink>
+        . It will not work with Expo Go. Run{" "}
+        <DocsCode>npx expo run:ios</DocsCode> or{" "}
+        <DocsCode>npx expo run:android</DocsCode> to build and run on a simulator
+        or device.
       </DocsNote>
 
       <DocsSection title="Prerequisites">
@@ -151,21 +158,6 @@ export default function InstallationPage() {
         <strong>Note:</strong> The map uses free CARTO basemap tiles by default.
         No API key required. Tiles automatically switch between light and dark
         themes based on your app&apos;s color scheme.
-      </DocsNote>
-
-      <DocsNote>
-        <strong>Expo Development Client:</strong> MapLibre React Native requires
-        a{" "}
-        <DocsLink
-          href="https://docs.expo.dev/develop/development-builds/introduction/"
-          external
-        >
-          development build
-        </DocsLink>
-        . It will not work with Expo Go. Run{" "}
-        <DocsCode>npx expo run:ios</DocsCode> or{" "}
-        <DocsCode>npx expo run:android</DocsCode> to build and run on a simulator
-        or device.
       </DocsNote>
     </DocsLayout>
   );
