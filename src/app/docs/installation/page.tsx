@@ -79,7 +79,7 @@ export default function InstallationPage() {
       title="Installation"
       description="How to install and set up mapcn in your React Native project."
       prev={{ title: "Introduction", href: "/docs" }}
-      next={{ title: "API Reference", href: "/docs/api-reference" }}
+      next={{ title: "Commercial use", href: "/docs/commercial-use" }}
     >
       <DocsNote>
         <strong>Alpha Version:</strong> This library requires{" "}
@@ -136,7 +136,7 @@ export default function InstallationPage() {
         </p>
       </DocsSection>
 
-      <DocsSection title="Install Maptiler based Map Component for commercial use">
+      <DocsSection title="Install Maptiler based Map Component for cheaper commercial use">
         <p>Run the following command to add the map component:</p>
         <CodeBlock code={installMaptilerMapCode} language="bash" />
 
@@ -145,7 +145,7 @@ export default function InstallationPage() {
         <p>Maptiler pricing:</p>
         <ul className="list-disc list-inside mb-4">
           <li>Free tier: 100,000 requests/month</li>
-          <li>Additional pricing info is available at: <DocsLink href="https://www.maptiler.com/cloud/pricing" external>Maptiler Pricing</DocsLink></li>
+          <li>Additional pricing info is available on <DocsLink href="https://www.maptiler.com/cloud/pricing" external>their pricing page</DocsLink></li>
         </ul>
 
         <p>Add the API key to your environment variables:</p>

@@ -14,6 +14,7 @@ import {
   Settings,
   Layers,
   Smartphone,
+  DollarSign,
 } from "lucide-react";
 
 import {
@@ -35,6 +36,7 @@ const navigation = [
     items: [
       { title: "Getting Started", href: "/docs", icon: BookOpen },
       { title: "Installation", href: "/docs/installation", icon: Code },
+      { title: "Commercial use", href: "/docs/commercial-use", icon: DollarSign },
       {
         title: "API Reference",
         href: "/docs/api-reference",
