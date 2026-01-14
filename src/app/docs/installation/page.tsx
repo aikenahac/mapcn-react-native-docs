@@ -127,6 +127,15 @@ export default function InstallationPage() {
         </p>
       </DocsSection>
 
+      <DocsNote>
+        <strong>Note:</strong> The map uses CARTO basemap tiles by default, which are only free for NON-COMMERCIAL use.
+        For cheaper commercial use, check out the {" "}<DocsLink href="/docs/commercial-use">
+            Maptiler based version of the component
+          </DocsLink>.{" "}
+        Tiles automatically switch between light and dark
+        themes based on your app&apos;s color scheme.
+      </DocsNote>
+
       <DocsSection title="Install Map Component">
         <p>Run the following command to add the map component:</p>
         <CodeBlock code={installMapCode} language="bash" />
@@ -179,12 +188,6 @@ export default function InstallationPage() {
         <p>Import and use the map component in your screens:</p>
         <CodeBlock code={usageCode} />
       </DocsSection>
-
-      <DocsNote>
-        <strong>Note:</strong> The map uses free CARTO basemap tiles by default.
-        No API key required. Tiles automatically switch between light and dark
-        themes based on your app&apos;s color scheme.
-      </DocsNote>
     </DocsLayout>
   );
 }
