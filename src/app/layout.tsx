@@ -3,6 +3,12 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 
 import { ThemeProvider } from "@/components/theme-provider";
+import { StructuredData } from "@/components/structured-data";
+import {
+  getOrganizationSchema,
+  getWebsiteSchema,
+  getSoftwareApplicationSchema,
+} from "@/lib/structured-data";
 import "./globals.css";
 
 const geist = Geist({
@@ -31,9 +37,12 @@ export const metadata: Metadata = {
   keywords: [
     "react native map",
     "maplibre",
+    "maplibre react native",
     "map components",
     "shadcn map",
+    "shadcn react native",
     "rnr map",
+    "react native reusables",
     "react native reusables map",
     "tailwind map",
     "nativewind map",
@@ -42,6 +51,15 @@ export const metadata: Metadata = {
     "interactive maps",
     "map markers",
     "map controls",
+    "mobile maps",
+    "ios maps",
+    "android maps",
+    "expo maps",
+    "mapbox alternative",
+    "open source maps",
+    "customizable maps",
+    "react native geolocation",
+    "react native location",
   ],
   authors: [
     { name: "Aiken Tine Ahac", url: "https://aiken.si" },
@@ -89,6 +107,27 @@ export const metadata: Metadata = {
     canonical: siteUrl,
   },
   category: "technology",
+  applicationName: "mapcn-react-native",
+  generator: "Next.js",
+  referrer: "origin-when-cross-origin",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  verification: {
+    // Add your verification codes here when you set them up
+    // google: "your-google-verification-code",
+    // yandex: "your-yandex-verification-code",
+  },
+  appleWebApp: {
+    capable: true,
+    title: "mapcn-react-native",
+    statusBarStyle: "black-translucent",
+  },
+  other: {
+    "msapplication-TileColor": "#000000",
+  },
 };
 
 export default function RootLayout({
@@ -106,6 +145,13 @@ export default function RootLayout({
         <script defer data-domain="mapcn-rn.aiken.si" src="https://plausible.aerio.cloud/js/script.outbound-links.js"></script>
       </head>
       <body className="font-sans antialiased">
+        <StructuredData
+          data={[
+            getOrganizationSchema(),
+            getWebsiteSchema(),
+            getSoftwareApplicationSchema(),
+          ]}
+        />
         <ThemeProvider>
           {children}
           <Analytics />

@@ -11,6 +11,22 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "API Reference",
+  description:
+    "Complete API reference for all mapcn-react-native components: Map, MapMarker, MapControls, MapRoute, and more. Includes props, types, and examples.",
+  keywords: [
+    "react native map api",
+    "maplibre api reference",
+    "react native map props",
+    "map component documentation",
+    "marker api",
+    "map controls",
+  ],
+  openGraph: {
+    title: "API Reference - mapcn-react-native",
+    description:
+      "Complete API reference for all mapcn-react-native components with props, types, and usage examples.",
+    type: "article",
+  },
 };
 
 const anatomyCode = `<Map>

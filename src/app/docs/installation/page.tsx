@@ -7,6 +7,12 @@ import {
 } from "../_components/docs";
 import { CodeBlock } from "../_components/code-block";
 import { Metadata } from "next";
+import { StructuredData } from "@/components/structured-data";
+import {
+  getTechArticleSchema,
+  getBreadcrumbSchema,
+  getHowToSchema,
+} from "@/lib/structured-data";
 
 const installMapCode = `npx @react-native-reusables/cli@latest add https://mapcn-rn.aiken.si/maps/map.json`;
 const installMaptilerMapCode = `npx @react-native-reusables/cli@latest add https://mapcn-rn.aiken.si/maps/map-maptiler.json`;
@@ -71,16 +77,69 @@ export default function BasicMapExample() {
 
 export const metadata: Metadata = {
   title: "Installation",
+  description:
+    "Complete installation guide for mapcn-react-native. Learn how to add beautiful map components to your React Native and Expo projects.",
+  keywords: [
+    "react native map installation",
+    "maplibre react native setup",
+    "expo maps",
+    "react native reusables",
+    "shadcn react native",
+    "nativewind maps",
+  ],
+  openGraph: {
+    title: "Installation - mapcn-react-native",
+    description:
+      "Complete installation guide for mapcn-react-native. Learn how to add beautiful map components to your React Native and Expo projects.",
+    type: "article",
+  },
 };
 
 export default function InstallationPage() {
+  const breadcrumbs = getBreadcrumbSchema([
+    { name: "Home", item: "/" },
+    { name: "Documentation", item: "/docs" },
+    { name: "Installation", item: "/docs/installation" },
+  ]);
+
+  const article = getTechArticleSchema(
+    "Installation Guide - mapcn-react-native",
+    "Complete installation guide for mapcn-react-native. Learn how to add beautiful map components to your React Native and Expo projects.",
+    "/docs/installation"
+  );
+
+  const howTo = getHowToSchema(
+    "How to Install mapcn-react-native",
+    "Step-by-step guide to install and set up mapcn map components in your React Native or Expo project",
+    [
+      {
+        name: "Install Dependencies",
+        text: "Install MapLibre React Native and Expo Location packages using npx expo install",
+      },
+      {
+        name: "Install Map Component",
+        text: "Add the map component to your project using the React Native Reusables CLI",
+      },
+      {
+        name: "Configure Permissions",
+        text: "Set up location permissions for iOS and Android in your app configuration",
+      },
+      {
+        name: "Use the Component",
+        text: "Import and use the Map component in your React Native screens",
+      },
+    ]
+  );
+
   return (
-    <DocsLayout
-      title="Installation"
-      description="How to install and set up mapcn in your React Native project."
-      prev={{ title: "Introduction", href: "/docs" }}
-      next={{ title: "Commercial use", href: "/docs/commercial-use" }}
-    >
+    <>
+      <StructuredData data={[breadcrumbs, article, howTo]} />
+      <DocsLayout
+        title="Installation"
+        description="How to install and set up mapcn in your React Native project."
+        prev={{ title: "Introduction", href: "/docs" }}
+        next={{ title: "Commercial use", href: "/docs/commercial-use" }}
+      >
       <DocsNote>
         <strong>Alpha Version:</strong> This library requires{" "}
         <DocsCode>@maplibre/maplibre-react-native@11.0.0-alpha.28</DocsCode>,
@@ -188,6 +247,7 @@ export default function InstallationPage() {
         <p>Import and use the map component in your screens:</p>
         <CodeBlock code={usageCode} />
       </DocsSection>
-    </DocsLayout>
+      </DocsLayout>
+    </>
   );
 }

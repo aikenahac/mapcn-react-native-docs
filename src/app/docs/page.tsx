@@ -28,6 +28,23 @@ const features = [
 
 export const metadata: Metadata = {
   title: "Introduction",
+  description:
+    "Beautiful, accessible map components for React Native. Built on MapLibre React Native with Nativewind styling and full TypeScript support.",
+  keywords: [
+    "react native map components",
+    "maplibre react native",
+    "shadcn react native",
+    "react native reusables",
+    "nativewind maps",
+    "typescript maps",
+    "mobile map library",
+  ],
+  openGraph: {
+    title: "Introduction - mapcn-react-native",
+    description:
+      "Beautiful, accessible map components for React Native. Built on MapLibre React Native with Nativewind styling and full TypeScript support.",
+    type: "article",
+  },
 };
 
 export default function IntroductionPage() {
