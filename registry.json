@@ -32,6 +32,21 @@
           "target": "components/ui/map.tsx"
         }
       ]
+    },
+    {
+      "name": "map-mapbox",
+      "type": "registry:ui",
+      "title": "Map (React Native) [Mapbox]",
+      "description": "A Mapbox-powered map component for React Native with markers, popups, labels, routes, and controls. Using maptiler for cheaper commercial use.",
+      "dependencies": ["@rnmapbox/maps@^10.2.10", "expo-location@^19.0.8"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/registry/map-mapbox.txt",
+          "type": "registry:ui",
+          "target": "components/ui/map.tsx"
+        }
+      ]
     }
   ]
 }

@@ -13,15 +13,12 @@ import {
   getBreadcrumbSchema,
   getHowToSchema,
 } from "@/lib/structured-data";
+import { Badge } from "@/components/ui/badge";
+import Link from "next/link";
 
 const installMapCode = `npx @react-native-reusables/cli@latest add https://mapcn-rn.dev/maps/map.json`;
+const installMapboxMapCode = `npx @react-native-reusables/cli@latest add https://mapcn-rn.dev/maps/map-mapbox.json`;
 const installMaptilerMapCode = `npx @react-native-reusables/cli@latest add https://mapcn-rn.dev/maps/map-maptiler.json`;
-
-const maptilerApiKeyCode = `# .env
-EXPO_PUBLIC_MAPTILER_API_KEY=your_maptiler_api_key_here
-`;
-
-const installDepsCode = `npx expo install @maplibre/maplibre-react-native@11.0.0-alpha.28 expo-location`;
 
 const setupPermissionsExpo = `<!-- app.json -->
 {
@@ -49,7 +46,7 @@ const setupPermissionsExpo = `<!-- app.json -->
     "plugins": [
       ...
       // this will show a warning for no valid plugin, but it is required
-      "@maplibre/maplibre-react-native"
+      "@maplibre/maplibre-react-native" // "@rnmapbox/maps" if using mapbox version
     ],
     ...
   }
@@ -145,10 +142,12 @@ export default function InstallationPage() {
         <DocsCode>@maplibre/maplibre-react-native@11.0.0-alpha.28</DocsCode>,
         which is currently in alpha. Version 11 is used due to its support for the new architecture.
         Breaking changes may arise.
+        <br />
+        You can use the <DocsLink href="/docs/commercial-use">mapbox version</DocsLink>, which uses stable <DocsCode>@rnmapbox/maps</DocsCode>
       </DocsNote>
 
       <DocsNote>
-        <strong>Expo Development Client:</strong> MapLibre React Native requires
+        <strong>Expo Development Client:</strong> MapLibre React Native (and Mabpox) require
         a{" "}
         <DocsLink
           href="https://docs.expo.dev/develop/development-builds/introduction/"
@@ -156,7 +155,7 @@ export default function InstallationPage() {
         >
           development build
         </DocsLink>
-        . It will not work with Expo Go. Run{" "}
+        . They will not work with Expo Go. Run{" "}
         <DocsCode>npx expo run:ios</DocsCode> or{" "}
         <DocsCode>npx expo run:android</DocsCode> to build and run on a simulator
         or device.
@@ -176,56 +175,52 @@ export default function InstallationPage() {
         </p>
       </DocsSection>
 
-      <DocsSection title="Install Dependencies">
-        <p>First, install the required packages:</p>
-        <CodeBlock code={installDepsCode} language="bash" />
-        <p>
-          This installs <DocsCode>@maplibre/maplibre-react-native</DocsCode> (the
-          map library) and <DocsCode>expo-location</DocsCode> (for location
-          services).
-        </p>
-      </DocsSection>
-
       <DocsNote>
         <strong>Note:</strong> The map uses CARTO basemap tiles by default, which are only free for NON-COMMERCIAL use.
         For cheaper commercial use, check out the {" "}<DocsLink href="/docs/commercial-use">
-            Maptiler based version of the component
+            Mapbox/Maptiler based version of the component
           </DocsLink>.{" "}
         Tiles automatically switch between light and dark
         themes based on your app&apos;s color scheme.
       </DocsNote>
 
       <DocsSection title="Install Map Component">
-        <p>Run the following command to add the map component:</p>
+        <p>There are three versions of the component:</p>
+        <ul className="list-disc list-inside mb-4">
+          <li>using maplibre with CARTO Basemaps (enterprise pricing for commercial use, free for non-commercial)</li>
+          <li>using mapbox (free tier - pay after reaching limit)</li>
+          <li>using maplibre with maptiler maps (free tier - pay after reaching limit)</li>
+        </ul>
+        <h2 className="font-bold text-lg">Install CARTO Basemaps-based map:</h2>
         <CodeBlock code={installMapCode} language="bash" />
+
+        <div className="flex flex-row items-center justify-between gap-2">
+          <h2 className="font-bold text-lg">Install mapbox-based map:</h2>
+          <Badge asChild>
+            <Link href="/docs/commercial-use">Additionial setup</Link>
+          </Badge>
+        </div>
+        <CodeBlock code={installMapboxMapCode} language="bash" />
+
+        <div className="flex flex-row items-center justify-between gap-2">
+          <h2 className="font-bold text-lg">Install maptiler-based map:</h2>
+          <Badge asChild>
+            <Link href="/docs/commercial-use">Additionial setup</Link>
+          </Badge>
+        </div>
+        <CodeBlock code={installMaptilerMapCode} language="bash" />
         <p>
           This will add the map component to{" "}
           <DocsCode>components/ui/map.tsx</DocsCode> in your project.
         </p>
-      </DocsSection>
-
-      <DocsSection title="Install Maptiler based Map Component for cheaper commercial use">
-        <p>Run the following command to add the map component:</p>
-        <CodeBlock code={installMaptilerMapCode} language="bash" />
-
-        <p>Get a Maptiler API key from the <DocsLink href="https://cloud.maptiler.com/account/keys" external>Maptiler</DocsLink> website.</p>
-
-        <p>Maptiler pricing:</p>
-        <ul className="list-disc list-inside mb-4">
-          <li>Free tier: 100,000 requests/month</li>
-          <li>Additional pricing info is available on <DocsLink href="https://www.maptiler.com/cloud/pricing" external>their pricing page</DocsLink></li>
-        </ul>
-
-        <p>Add the API key to your environment variables:</p>
-        <CodeBlock code={maptilerApiKeyCode} language="bash" />
 
         <p>
-          This will add the maptiler-based map component to{" "}
-          <DocsCode>components/ui/map.tsx</DocsCode> in your project.
+          Check out the <DocsLink href="/docs/commercial-use">commercial use page</DocsLink> for more information and additional setup steps.
         </p>
       </DocsSection>
 
       <DocsSection title="Configure Permissions">
+        <p>Under plugins, you cannot have both maplibre and rnmapbox packages, and it will throw an error if both are inside the app.</p>
         <p>
           If you plan to use location features, configure permissions for iOS and
           Android:
