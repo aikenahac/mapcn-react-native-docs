@@ -5,7 +5,7 @@ import { Copy, Check, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 
-const installCommand = `npx @react-native-reusables/cli@latest add https://mapcn-rn.aiken.si/maps/map.json`;
+const installCommand = `npx @react-native-reusables/cli@latest add https://mapcn-rn.dev/maps/map.json`;
 
 function CopyButton({ text }: { text: string }) {
   const [copied, setCopied] = useState(false);

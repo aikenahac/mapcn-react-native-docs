@@ -7,7 +7,7 @@ import {
 import { CodeBlock } from "../_components/code-block";
 import { Metadata } from "next";
 
-const installMaptilerMapCode = `npx @react-native-reusables/cli@latest add https://mapcn-rn.aiken.si/maps/map-maptiler.json`;
+const installMaptilerMapCode = `npx @react-native-reusables/cli@latest add https://mapcn-rn.dev/maps/map-maptiler.json`;
 
 const maptilerApiKeyCode = `# .env
 EXPO_PUBLIC_MAPTILER_API_KEY=your_maptiler_api_key_here
