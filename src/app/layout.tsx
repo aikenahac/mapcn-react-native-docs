@@ -142,7 +142,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        <script defer data-domain="mapcn-rn.aiken.si" src="https://plausible.aerio.cloud/js/script.outbound-links.js"></script>
+        <script defer data-domain="mapcn-rn.dev" src="https://plausible.aerio.cloud/js/script.outbound-links.js"></script>
       </head>
       <body className="font-sans antialiased">
         <StructuredData
