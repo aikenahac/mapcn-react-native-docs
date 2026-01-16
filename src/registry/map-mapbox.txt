@@ -5,8 +5,9 @@ import Mapbox, {
   type MapView as MapboxMapViewRef,
 } from "@rnmapbox/maps";
 import * as Location from "expo-location";
-import {
+import React, {
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useId,
@@ -17,7 +18,6 @@ import {
 } from "react";
 import { ActivityIndicator, Pressable, Text, View } from "react-native";
 
-// Initialize Mapbox
 const MAPBOX_ACCESS_TOKEN = process.env.EXPO_PUBLIC_MAPBOX_API_KEY;
 
 if (MAPBOX_ACCESS_TOKEN) {
@@ -25,7 +25,7 @@ if (MAPBOX_ACCESS_TOKEN) {
 } else {
   console.warn(
     "[map-mapbox] EXPO_PUBLIC_MAPBOX_API_KEY not found. " +
-      "Get your free Mapbox token at: https://account.mapbox.com/access-tokens/"
+      "Get your free Mapbox token at: https://account.mapbox.com/access-tokens/",
   );
 }
 
@@ -48,7 +48,7 @@ type CameraWrapperRef = {
 };
 
 function createCameraWrapper(
-  internalCameraRef: React.RefObject<MapboxCameraRef | null>
+  internalCameraRef: React.RefObject<MapboxCameraRef | null>,
 ): CameraWrapperRef {
   return {
     current: {
@@ -77,6 +77,8 @@ type MapContextValue = {
   cameraRef: CameraWrapperRef;
   isLoaded: boolean;
   theme: "light" | "dark";
+  registerOverlay: (id: string, element: ReactNode) => void;
+  unregisterOverlay: (id: string) => void;
 };
 
 const MapContext = createContext<MapContextValue | null>(null);
@@ -130,19 +132,29 @@ function Map({
   const mapRef = useRef<MapboxMapViewRef | null>(null);
   const internalCameraRef = useRef<MapboxCameraRef | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [overlays, setOverlays] = useState<Record<string, ReactNode>>({});
   const { colorScheme } = useTheme();
   const theme = colorScheme === "dark" ? "dark" : "light";
 
   // Create camera wrapper with MapLibre-compatible API
-  const cameraRef = useMemo(
-    () => createCameraWrapper(internalCameraRef),
-    []
-  );
+  const cameraRef = useMemo(() => createCameraWrapper(internalCameraRef), []);
+
+  const registerOverlay = useCallback((id: string, element: ReactNode) => {
+    setOverlays((prev) => ({ ...prev, [id]: element }));
+  }, []);
+
+  const unregisterOverlay = useCallback((id: string) => {
+    setOverlays((prev) => {
+      const next = { ...prev };
+      delete next[id];
+      return next;
+    });
+  }, []);
 
   const mapStyle =
     theme === "dark"
-      ? styles?.dark ?? defaultStyles.dark
-      : styles?.light ?? defaultStyles.light;
+      ? (styles?.dark ?? defaultStyles.dark)
+      : (styles?.light ?? defaultStyles.light);
 
   const handleMapIdle = () => {
     if (!isLoaded) {
@@ -151,7 +163,9 @@ function Map({
   };
 
   return (
-    <MapContext.Provider value={{ mapRef, cameraRef, isLoaded, theme }}>
+    <MapContext.Provider
+      value={{ mapRef, cameraRef, isLoaded, theme, registerOverlay, unregisterOverlay }}
+    >
       <View className={cn("flex-1 relative", className)}>
         <Mapbox.MapView
           ref={mapRef}
@@ -172,6 +186,9 @@ function Map({
           {children}
         </Mapbox.MapView>
         {showLoader && !isLoaded && <DefaultLoader />}
+        {Object.entries(overlays).map(([id, element]) => (
+          <React.Fragment key={id}>{element}</React.Fragment>
+        ))}
       </View>
     </MapContext.Provider>
   );
@@ -286,13 +303,13 @@ function MarkerLabel({
       className={cn(
         "absolute left-1/2 translate-x-[-50%]",
         position === "top" ? "mb-1 bottom-full" : "mt-1 top-full",
-        className
+        className,
       )}
     >
       <Text
         className={cn(
           "text-[10px] font-semibold text-foreground",
-          classNameText
+          classNameText,
         )}
       >
         {children}
@@ -316,11 +333,12 @@ function MapControls({
   className,
   onLocate,
 }: MapControlsProps) {
-  const { cameraRef, mapRef, isLoaded } = useMap();
+  const { cameraRef, mapRef, isLoaded, registerOverlay, unregisterOverlay } = useMap();
   const [waitingForLocation, setWaitingForLocation] = useState(false);
   const [currentZoom, setCurrentZoom] = useState(10);
+  const overlayId = useId();
 
-  const handleZoomIn = async () => {
+  const handleZoomIn = useCallback(async () => {
     if (cameraRef.current && mapRef.current) {
       const center = await mapRef.current.getCenter();
       const newZoom = Math.min(currentZoom + 1, 20);
@@ -331,9 +349,9 @@ function MapControls({
         duration: 300,
       });
     }
-  };
+  }, [cameraRef, mapRef, currentZoom]);
 
-  const handleZoomOut = async () => {
+  const handleZoomOut = useCallback(async () => {
     if (cameraRef.current && mapRef.current) {
       const center = await mapRef.current.getCenter();
       const newZoom = Math.max(currentZoom - 1, 0);
@@ -344,9 +362,9 @@ function MapControls({
         duration: 300,
       });
     }
-  };
+  }, [cameraRef, mapRef, currentZoom]);
 
-  const handleLocate = async () => {
+  const handleLocate = useCallback(async () => {
     setWaitingForLocation(true);
     try {
       const location = await Location.getCurrentPositionAsync({});
@@ -371,53 +389,79 @@ function MapControls({
     } finally {
       setWaitingForLocation(false);
     }
-  };
+  }, [cameraRef, onLocate]);
 
-  if (!isLoaded) return null;
-
-  const positionStyle = {
-    "top-left": { top: 8, left: 8 },
-    "top-right": { top: 8, right: 8 },
-    "bottom-left": { bottom: 8, left: 8 },
-    "bottom-right": { bottom: 8, right: 8 },
-  }[position];
-
-  return (
-    <View className={cn("absolute gap-1.5", className)} style={positionStyle}>
-      {showZoom && (
-        <View
-          className="rounded border border-gray-200 bg-white shadow-sm overflow-hidden"
-          style={{ elevation: 2 }}
-        >
-          <ControlButton onPress={handleZoomIn} label="+">
-            <Text className="text-lg font-semibold text-gray-700">+</Text>
-          </ControlButton>
-          <View className="h-[1px] bg-gray-200" />
-          <ControlButton onPress={handleZoomOut} label="-">
-            <Text className="text-lg font-semibold text-gray-700">−</Text>
-          </ControlButton>
-        </View>
-      )}
-      {showLocate && (
-        <View
-          className="rounded border border-gray-200 bg-white shadow-sm overflow-hidden"
-          style={{ elevation: 2 }}
-        >
-          <ControlButton
-            onPress={handleLocate}
-            label="📍"
-            disabled={waitingForLocation}
-          >
-            {waitingForLocation ? (
-              <ActivityIndicator size="small" color="#666" />
-            ) : (
-              <Text className="text-lg font-semibold text-gray-700">📍</Text>
-            )}
-          </ControlButton>
-        </View>
-      )}
-    </View>
+  const positionStyle = useMemo(
+    () =>
+      ({
+        "top-left": { top: 8, left: 8, zIndex: 1000 },
+        "top-right": { top: 8, right: 8, zIndex: 1000 },
+        "bottom-left": { bottom: 8, left: 8, zIndex: 1000 },
+        "bottom-right": { bottom: 8, right: 8, zIndex: 1000 },
+      })[position],
+    [position]
   );
+
+  const controlsElement = useMemo(
+    () => (
+      <View className={cn("absolute gap-1.5", className)} style={positionStyle}>
+        {showZoom && (
+          <View
+            className="rounded border border-gray-200 bg-white shadow-sm overflow-hidden"
+            style={{ elevation: 2 }}
+          >
+            <ControlButton onPress={handleZoomIn} label="+">
+              <Text className="text-lg font-semibold text-gray-700">+</Text>
+            </ControlButton>
+            <View className="h-[1px] bg-gray-200" />
+            <ControlButton onPress={handleZoomOut} label="-">
+              <Text className="text-lg font-semibold text-gray-700">−</Text>
+            </ControlButton>
+          </View>
+        )}
+        {showLocate && (
+          <View
+            className="rounded border border-gray-200 bg-white shadow-sm overflow-hidden"
+            style={{ elevation: 2 }}
+          >
+            <ControlButton
+              onPress={handleLocate}
+              label="📍"
+              disabled={waitingForLocation}
+            >
+              {waitingForLocation ? (
+                <ActivityIndicator size="small" color="#666" />
+              ) : (
+                <Text className="text-lg font-semibold text-gray-700">📍</Text>
+              )}
+            </ControlButton>
+          </View>
+        )}
+      </View>
+    ),
+    [
+      className,
+      positionStyle,
+      showZoom,
+      showLocate,
+      handleZoomIn,
+      handleZoomOut,
+      handleLocate,
+      waitingForLocation,
+    ]
+  );
+
+  useEffect(() => {
+    if (isLoaded) {
+      registerOverlay(overlayId, controlsElement);
+    }
+    return () => {
+      unregisterOverlay(overlayId);
+    };
+  }, [isLoaded, overlayId, registerOverlay, unregisterOverlay, controlsElement]);
+
+  // Return null because the actual rendering happens via the overlay portal
+  return null;
 }
 
 function ControlButton({
@@ -580,3 +624,4 @@ export {
   MarkerPopup,
   useMap
 };
+
