@@ -5,6 +5,7 @@ import { Separator } from "@/components/ui/separator";
 import { GitHubButton } from "@/components/github-button";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { cn } from "@/lib/utils";
+import { BuyMeACoffee } from "./bmac";
 
 interface HeaderProps {
   className?: string;
@@ -26,6 +27,8 @@ export function Header({ className, leftContent }: HeaderProps) {
           </Link>
         </div>
         <div className="flex items-center gap-1.5 h-4.5">
+          <BuyMeACoffee />
+          <Separator orientation="vertical" />
           <GitHubButton />
           <Separator orientation="vertical" />
           <ThemeToggle />
