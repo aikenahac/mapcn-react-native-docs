@@ -1,5 +1,5 @@
 import { Zap, Moon, Puzzle, Code } from "lucide-react";
-import { DocsLayout, DocsSection, DocsLink } from "./_components/docs";
+import { DocsLayout, DocsSection, DocsLink, DocsCode } from "./_components/docs";
 import { Metadata } from "next";
 
 const features = [
@@ -92,6 +92,9 @@ export default function IntroductionPage() {
                 , which is currently in alpha. Version 11 is used due to its support for the new architecture.
                 Breaking changes may arise.
               </p>
+
+              <p>You may use the <DocsLink href="/docs/commercial-use">Mapbox version</DocsLink>, which uses <DocsCode>
+                <DocsLink href="https://rnmapbox.github.io/">@rnmapbox/maps</DocsLink></DocsCode>, which is not in alpha.</p>
             </div>
           </div>
         </div>
