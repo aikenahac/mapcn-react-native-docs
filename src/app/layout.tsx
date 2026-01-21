@@ -25,7 +25,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 const siteName = "mapcn-react-native";
 const creator = "https://aiken.si";
 const siteDescription =
-  "A collection of beautifully designed, accessible, and customizable map components. Built on MapLibre React Native. Styled with Tailwind CSS (via Nativewind). Works with React Native Reusables (shadcn/ui for React Native).";
+  "A collection of beautifully designed, accessible, and customizable map components. Built on MapLibre / Mapbox React Native. Styled with Tailwind CSS (via Nativewind). Works with React Native Reusables (shadcn/ui for React Native).";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -44,6 +44,7 @@ export const metadata: Metadata = {
     "rnr map",
     "react native reusables",
     "react native reusables map",
+    "react native reusables mapcn",
     "tailwind map",
     "nativewind map",
     "react native map library",
@@ -60,6 +61,12 @@ export const metadata: Metadata = {
     "customizable maps",
     "react native geolocation",
     "react native location",
+    "shadcn mapbox",
+    "mapcn mapbox",
+    "mapbox",
+    "mapbox react native",
+    "beautiful maps",
+    "map components library",
   ],
   authors: [
     { name: "Aiken Tine Ahac", url: "https://aiken.si" },
