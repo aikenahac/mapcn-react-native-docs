@@ -1,9 +1,77 @@
 import { DocsLayout, DocsSection, DocsCode, DocsLink, DocsNote } from "../_components/docs";
+import { CodeBlock } from "../_components/code-block";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Gotchas",
 };
+
+const mapInScrollViewCode = `import { useState } from "react";
+import { ScrollView, View, Text } from "react-native";
+import { Map } from "@/components/ui/map";
+import { ScrollViewMapWrapper } from "@/components/scroll-view-map-wrapper";
+
+export function MapInScrollView() {
+  const [scrollEnabled, setScrollEnabled] = useState(true);
+
+  return (
+    <ScrollView className="flex-1" scrollEnabled={scrollEnabled}>
+      <View className="px-6 py-8 w-full gap-6">
+        <View>
+          <Text className="text-3xl font-bold mb-2">Map in ScrollView</Text>
+          <Text className="text-muted-foreground">
+            Scroll the page outside the map, pan and zoom inside the map.
+          </Text>
+        </View>
+
+        <ScrollViewMapWrapper
+          onScrollEnabledChange={setScrollEnabled}
+          className="h-[500px] rounded-xl overflow-hidden border border-border"
+        >
+          <Map zoom={12} center={[-122.4194, 37.7749]} />
+        </ScrollViewMapWrapper>
+      </View>
+    </ScrollView>
+  );
+}`;
+
+const scrollViewWrapperCode = `import React, { useCallback, ReactNode } from "react";
+import { View, ViewStyle } from "react-native";
+
+interface ScrollViewMapWrapperProps {
+  children: ReactNode;
+  onScrollEnabledChange?: (enabled: boolean) => void;
+  style?: ViewStyle;
+  className?: string;
+}
+
+// Helper for using map components inside a ScrollView without gesture conflicts
+export function ScrollViewMapWrapper({
+  children,
+  onScrollEnabledChange,
+  style,
+  className,
+}: ScrollViewMapWrapperProps) {
+  const handleTouchStart = useCallback(() => {
+    onScrollEnabledChange?.(false);
+  }, [onScrollEnabledChange]);
+
+  const handleTouchEnd = useCallback(() => {
+    onScrollEnabledChange?.(true);
+  }, [onScrollEnabledChange]);
+
+  return (
+    <View
+      style={style}
+      className={className}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+      onTouchCancel={handleTouchEnd}
+    >
+      {children}
+    </View>
+  );
+}`;
 
 export default function GotchasPage() {
   return (
@@ -46,36 +114,9 @@ export default function GotchasPage() {
           on the map area.
         </p>
 
-        <pre className="rounded-lg border bg-muted/40 p-4 text-xs overflow-x-auto">
-          <code>{`import { useState } from "react";
-import { ScrollView, View, Text } from "react-native";
-import { Map } from "@/components/ui/map";
-import { ScrollViewMapWrapper } from "@/components/scroll-view-map-wrapper";
-
-export function MapInScrollView() {
-  const [scrollEnabled, setScrollEnabled] = useState(true);
-
-  return (
-    <ScrollView className="flex-1" scrollEnabled={scrollEnabled}>
-      <View className="px-6 py-8 w-full gap-6">
-        <View>
-          <Text className="text-3xl font-bold mb-2">Map in ScrollView</Text>
-          <Text className="text-muted-foreground">
-            Scroll the page outside the map, pan and zoom inside the map.
-          </Text>
-        </View>
-
-        <ScrollViewMapWrapper
-          onScrollEnabledChange={setScrollEnabled}
-          className="h-[500px] rounded-xl overflow-hidden border border-border"
-        >
-          <Map zoom={12} center={[-122.4194, 37.7749]} />
-        </ScrollViewMapWrapper>
-      </View>
-    </ScrollView>
-  );
-}`}</code>
-        </pre>
+        {/* Server component with syntax highlighting + copy button */}
+        {/* @ts-expect-error Async Server Component */}
+        <CodeBlock code={mapInScrollViewCode} />
       </DocsSection>
 
       <DocsSection title="Wrapper Implementation (Example App)">
@@ -84,45 +125,8 @@ export function MapInScrollView() {
           adapt it as needed. It works for both MapLibre and Mapbox versions of the components.
         </p>
 
-        <pre className="rounded-lg border bg-muted/40 p-4 text-xs overflow-x-auto">
-          <code>{`import React, { useCallback, ReactNode } from "react";
-import { View, ViewStyle } from "react-native";
-
-interface ScrollViewMapWrapperProps {
-  children: ReactNode;
-  onScrollEnabledChange?: (enabled: boolean) => void;
-  style?: ViewStyle;
-  className?: string;
-}
-
-// Helper for using map components inside a ScrollView without gesture conflicts
-export function ScrollViewMapWrapper({
-  children,
-  onScrollEnabledChange,
-  style,
-  className,
-}: ScrollViewMapWrapperProps) {
-  const handleTouchStart = useCallback(() => {
-    onScrollEnabledChange?.(false);
-  }, [onScrollEnabledChange]);
-
-  const handleTouchEnd = useCallback(() => {
-    onScrollEnabledChange?.(true);
-  }, [onScrollEnabledChange]);
-
-  return (
-    <View
-      style={style}
-      className={className}
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
-      onTouchCancel={handleTouchEnd}
-    >
-      {children}
-    </View>
-  );
-}`}</code>
-        </pre>
+        {/* @ts-expect-error Async Server Component */}
+        <CodeBlock code={scrollViewWrapperCode} />
       </DocsSection>
 
       <DocsSection title="Notes and Best Practices">
