@@ -83,7 +83,7 @@ export default function GotchasPage() {
       <DocsSection title="Using Maps Inside a ScrollView (Android)">
         <p>
           On Android, embedding a <DocsCode>Map</DocsCode> inside a React Native <DocsCode>ScrollView</DocsCode>
-          can cause gesture conflicts. Vertical scroll gestures from the parent ScrollView often "win"
+          can cause gesture conflicts. Vertical scroll gestures from the parent ScrollView often &quot;win&quot;
           over map pan and zoom, so the map flickers while the screen scrolls.
         </p>
       </DocsSection>
@@ -115,7 +115,6 @@ export default function GotchasPage() {
         </p>
 
         {/* Server component with syntax highlighting + copy button */}
-        {/* @ts-expect-error Async Server Component */}
         <CodeBlock code={mapInScrollViewCode} />
       </DocsSection>
 
@@ -125,7 +124,6 @@ export default function GotchasPage() {
           adapt it as needed. It works for both MapLibre and Mapbox versions of the components.
         </p>
 
-        {/* @ts-expect-error Async Server Component */}
         <CodeBlock code={scrollViewWrapperCode} />
       </DocsSection>
 
