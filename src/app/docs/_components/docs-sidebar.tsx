@@ -59,6 +59,7 @@ const navigation = [
       { title: "Routes", href: "/docs/routes", icon: Route },
       { title: "Clusters", href: "/docs/clusters", icon: Layers },
       { title: "Advanced Usage", href: "/docs/advanced-usage", icon: Wrench },
+      { title: "Gotchas", href: "/docs/gotchas", icon: Wrench },
     ],
   },
 ];
