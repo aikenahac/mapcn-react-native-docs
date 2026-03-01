@@ -138,9 +138,9 @@ export default function InstallationPage() {
         next={{ title: "Commercial use", href: "/docs/commercial-use" }}
       >
       <DocsNote>
-        <strong>Alpha Version:</strong> This library requires{" "}
-        <DocsCode>@maplibre/maplibre-react-native@11.0.0-alpha.28</DocsCode>,
-        which is currently in alpha. Version 11 is used due to its support for the new architecture.
+        <strong>Beta Version:</strong> This library requires{" "}
+        <DocsCode>@maplibre/maplibre-react-native@11.0.0-beta.10</DocsCode>,
+        which is currently in beta. Version 11 is used due to its support for the new architecture.
         Breaking changes may arise.
         <br />
         You can use the <DocsLink href="/docs/commercial-use">mapbox version</DocsLink>, which uses stable <DocsCode>@rnmapbox/maps</DocsCode>

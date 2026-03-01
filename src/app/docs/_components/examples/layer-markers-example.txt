@@ -1,6 +1,5 @@
+import { GeoJSONSource, Layer } from "@maplibre/maplibre-react-native";
 import { Map } from "@/components/ui/map";
-import { CircleLayer, ShapeSource, SymbolLayer } from "@maplibre/maplibre-react-native";
-import { Text, View } from "react-native";
 
 export default function LayerMarkersExample() {
   const geojson = {
@@ -30,48 +29,40 @@ export default function LayerMarkersExample() {
   };
 
   return (
-    <View className="h-[500px] rounded-xl overflow-hidden border border-border relative">
-      <Map zoom={13} center={[-122.4083, 37.802]}>
-        <ShapeSource id="layer-markers-source" data={geojson}>
-          <CircleLayer
-            id="layer-markers-circles"
-            style={{
-              circleRadius: [
-                "interpolate",
-                ["linear"],
-                ["get", "count"],
-                500,
-                15,
-                1500,
-                25,
-              ],
-              circleColor: "#f59e0b",
-              circleOpacity: 0.7,
-              circleStrokeWidth: 2,
-              circleStrokeColor: "#ffffff",
-            }}
-          />
-          <SymbolLayer
-            id="layer-markers-labels"
-            style={{
-              textField: ["get", "title"],
-              textSize: 12,
-              textColor: "#ffffff",
-              textHaloColor: "#000000",
-              textHaloWidth: 1,
-              textOffset: [0, 2],
-            }}
-          />
-        </ShapeSource>
-      </Map>
-
-      <View className="absolute bottom-4 left-4 right-4 bg-background/95 backdrop-blur-sm rounded-lg p-4 border border-border shadow-lg">
-        <Text className="text-sm font-medium text-foreground mb-2">Features:</Text>
-        <Text className="text-sm text-muted-foreground">
-          • Circle size based on count property{"\n"}• Automatic label positioning{"\n"}
-          • Efficient rendering for large datasets
-        </Text>
-      </View>
-    </View>
+    <Map zoom={13} center={[-122.4083, 37.802]}>
+      <GeoJSONSource id="layer-markers-source" data={geojson}>
+        <Layer
+          id="layer-markers-circles"
+          type="circle"
+          style={{
+            circleRadius: [
+              "interpolate",
+              ["linear"],
+              ["get", "count"],
+              500,
+              15,
+              1500,
+              25,
+            ],
+            circleColor: "#f59e0b",
+            circleOpacity: 0.7,
+            circleStrokeWidth: 2,
+            circleStrokeColor: "#ffffff",
+          }}
+        />
+        <Layer
+          id="layer-markers-labels"
+          type="symbol"
+          style={{
+            textField: ["get", "title"],
+            textSize: 12,
+            textColor: "#ffffff",
+            textHaloColor: "#000000",
+            textHaloWidth: 1,
+            textOffset: [0, 2],
+          }}
+        />
+      </GeoJSONSource>
+    </Map>
   );
 }

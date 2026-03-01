@@ -85,19 +85,19 @@ export default function IntroductionPage() {
             </div>
             <div className="space-y-1">
               <p className="text-sm font-medium text-amber-900 dark:text-amber-100">
-                Alpha Version Notice
+                Beta Version Notice
               </p>
               <p className="text-sm text-amber-800 dark:text-amber-200">
                 This library requires{" "}
                 <code className="px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-900/50 text-xs font-mono">
-                  @maplibre/maplibre-react-native@11.0.0-alpha.28
+                  @maplibre/maplibre-react-native@11.0.0-beta.10
                 </code>
-                , which is currently in alpha. Version 11 is used due to its support for the new architecture.
+                , which is currently in beta. Version 11 is used due to its support for the new architecture.
                 Breaking changes may arise.
               </p>
 
               <p>You may use the <DocsLink href="/docs/commercial-use">Mapbox version</DocsLink>, which uses <DocsCode>
-                <DocsLink href="https://rnmapbox.github.io/">@rnmapbox/maps</DocsLink></DocsCode>, which is not in alpha.</p>
+                <DocsLink href="https://rnmapbox.github.io/">@rnmapbox/maps</DocsLink></DocsCode>, which is not in beta.</p>
             </div>
           </div>
         </div>

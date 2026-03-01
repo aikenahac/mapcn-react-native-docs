@@ -59,7 +59,7 @@ Uses Shiki for syntax highlighting with theme-aware rendering (`src/lib/highligh
 The map component is for React Native and provides:
 
 1. **Dependencies**:
-   - `@maplibre/maplibre-react-native` v11.0.0-alpha.26 - Core map library
+   - `@maplibre/maplibre-react-native` v11.0.0-beta.10 - Core map library
    - `expo-location` v19.0.8 - Location services and permissions
 
 2. **Architecture**:
