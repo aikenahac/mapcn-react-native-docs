@@ -15,6 +15,7 @@ import {
   Layers,
   Smartphone,
   DollarSign,
+  FileCode2,
 } from "lucide-react";
 
 import {
@@ -60,6 +61,14 @@ const navigation = [
       { title: "Clusters", href: "/docs/clusters", icon: Layers },
       { title: "Advanced Usage", href: "/docs/advanced-usage", icon: Wrench },
       { title: "Gotchas", href: "/docs/gotchas", icon: Wrench },
+    ],
+  },
+  {
+    title: "Direct Source",
+    items: [
+      { title: "Default Map", href: "/docs/source-default", icon: FileCode2 },
+      { title: "MapTiler Map", href: "/docs/source-maptiler", icon: FileCode2 },
+      { title: "Mapbox Map", href: "/docs/source-mapbox", icon: FileCode2 },
     ],
   },
 ];
