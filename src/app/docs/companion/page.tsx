@@ -7,6 +7,8 @@ export const metadata: Metadata = {
 };
 
 export default function CompanionAppPage() {
+  const CDN_URL = process.env.NEXT_PUBLIC_BUNNY_CDN_URL;
+
   return (
     <DocsLayout
       title="Companion App"
@@ -16,7 +18,7 @@ export default function CompanionAppPage() {
     >
       <DocsSection title="iOS Download">
         <Image
-          src={`/qr/apple_app_store.png`}
+          src={`${CDN_URL}/qr/apple_app_store.png`}
           width={256}
           height={256}
           alt="QR code for iOS app"
@@ -28,7 +30,7 @@ export default function CompanionAppPage() {
 
       <DocsSection title="Android Download">
         <Image
-          src={`/qr/google_play.png`}
+          src={`${CDN_URL}/qr/google_play.png`}
           width={256}
           height={256}
           alt="QR code for Android app"

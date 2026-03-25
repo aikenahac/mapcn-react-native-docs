@@ -12,6 +12,8 @@ function ExampleCard({
   delay?: string;
   screenshot: string;
 }) {
+  const CDN_URL = process.env.NEXT_PUBLIC_BUNNY_CDN_URL;
+
   return (
     <div
       className={cn(
@@ -26,7 +28,7 @@ function ExampleCard({
         </div>
       )}
       <Image
-        src={`/screenshots/home/${screenshot}`}
+        src={`${CDN_URL}/screenshots/home/${screenshot}`}
         alt={label}
         width={800}
         height={600}
