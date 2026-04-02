@@ -44,9 +44,9 @@ export function Hero() {
         </p>
       </div>
       <div className="animate-fade-up delay-200 text-center">
-        <div className="inline-flex items-center gap-3 bg-secondary/60 border border-border/40 rounded-full px-4 py-2.5 font-mono text-sm max-w-full overflow-x-auto">
+        <div className="inline-flex max-w-full items-center gap-3 overflow-hidden rounded-full border border-border/40 bg-secondary/60 px-4 py-2.5 font-mono text-sm">
           <span className="text-muted-foreground/60 shrink-0">$</span>
-          <code className="text-foreground/90 truncate">{installCommand}</code>
+          <code className="min-w-0 truncate text-foreground/90">{installCommand}</code>
           <CopyButton text={installCommand} />
         </div>
       </div>

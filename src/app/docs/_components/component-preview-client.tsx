@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { HorizontalScrollArea } from "@/components/ui/horizontal-scroll-area";
 import { cn } from "@/lib/utils";
 import { CopyButton } from "./copy-button";
 import Image from "next/image";
@@ -24,6 +25,7 @@ export function ComponentPreviewClient({
   cdnUrl,
 }: ComponentPreviewClientProps) {
   const [activeTab, setActiveTab] = useState<"preview" | "code" | "qr">("preview");
+  const previewPaneClassName = cn("h-150 overflow-hidden", className);
 
   return (
     <div className="w-full rounded-lg border overflow-hidden">
@@ -69,8 +71,8 @@ export function ComponentPreviewClient({
         <CopyButton text={code} />
       </div>
 
-      <div className={cn("h-150 overflow-hidden", className)}>
-        {activeTab === "preview" ? (
+      {activeTab === "preview" ? (
+        <div className={previewPaneClassName}>
           <div className="h-full bg-muted/10 flex items-center justify-center">
             {screenshotName ? (
               <Image
@@ -87,12 +89,14 @@ export function ComponentPreviewClient({
               </p>
             )}
           </div>
-        ) : activeTab === "code" ? (
-          <div
-            className="h-full p-4 overflow-auto text-sm bg-muted/20 [&_pre]:bg-transparent! [&_code]:bg-transparent!"
-            dangerouslySetInnerHTML={{ __html: highlightedCode }}
-          />
-        ) : (
+        </div>
+      ) : activeTab === "code" ? (
+        <HorizontalScrollArea
+          className="p-4 text-sm bg-muted/20 [&_pre]:bg-transparent! [&_code]:bg-transparent!"
+          dangerouslySetInnerHTML={{ __html: highlightedCode }}
+        />
+      ) : (
+        <div className={previewPaneClassName}>
           <div className="h-full bg-muted/10 flex items-center justify-center p-8">
             {qrCodeName ? (
               <div className="flex flex-col items-center gap-4">
@@ -113,8 +117,8 @@ export function ComponentPreviewClient({
               </p>
             )}
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }

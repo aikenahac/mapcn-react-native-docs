@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { HorizontalScrollArea } from "@/components/ui/horizontal-scroll-area";
 import { CopyButton } from "./copy-button";
 import { cn } from "@/lib/utils";
 import {
@@ -101,8 +102,8 @@ export function PackageManagerCodeBlockClient({
         </div>
         {showCopyButton && <CopyButton text={activeVariant.code} />}
       </div>
-      <div
-        className="p-4 overflow-auto text-sm bg-muted/20 [&_pre]:bg-transparent! [&_code]:bg-transparent!"
+      <HorizontalScrollArea
+        className="p-4 overflow-y-visible text-sm bg-muted/20 [&_pre]:bg-transparent! [&_code]:bg-transparent!"
         dangerouslySetInnerHTML={{ __html: activeVariant.highlighted }}
       />
     </div>

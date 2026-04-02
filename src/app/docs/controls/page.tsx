@@ -1,5 +1,6 @@
 import { DocsLayout, DocsSection, DocsCode, DocsNote } from "../_components/docs";
 import { ComponentPreview } from "../_components/component-preview";
+import { HorizontalScrollArea } from "@/components/ui/horizontal-scroll-area";
 import { getExampleSource } from "@/lib/get-example-source";
 import { Metadata } from "next";
 
@@ -42,8 +43,9 @@ export default function ControlsPage() {
           user&apos;s current location on the map with automatic permission
           handling:
         </p>
-        <pre className="mt-4 p-4 rounded-lg bg-muted text-sm overflow-x-auto">
-          <code>{`<Map center={[0, 0]} zoom={12}>
+        <HorizontalScrollArea className="mt-4 rounded-lg bg-muted">
+          <pre className="p-4 text-sm">
+            <code>{`<Map center={[0, 0]} zoom={12}>
   <MapUserLocation
     visible={true}
     showAccuracy={true}
@@ -51,7 +53,8 @@ export default function ControlsPage() {
   />
   <MapControls showZoom showLocate />
 </Map>`}</code>
-        </pre>
+          </pre>
+        </HorizontalScrollArea>
       </DocsSection>
     </DocsLayout>
   );

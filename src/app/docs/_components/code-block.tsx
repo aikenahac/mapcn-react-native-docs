@@ -1,4 +1,5 @@
 import { highlightCode } from "@/lib/highlight";
+import { HorizontalScrollArea } from "@/components/ui/horizontal-scroll-area";
 import { CopyButton } from "./copy-button";
 
 interface CodeBlockProps {
@@ -21,8 +22,8 @@ export async function CodeBlock({
           <CopyButton text={code} />
         </div>
       )}
-      <div
-        className="p-4 overflow-auto text-sm bg-muted/20 [&_pre]:bg-transparent! [&_code]:bg-transparent!"
+      <HorizontalScrollArea
+        className="p-4 overflow-y-visible text-sm bg-muted/20 [&_pre]:bg-transparent! [&_code]:bg-transparent!"
         dangerouslySetInnerHTML={{ __html: highlighted }}
       />
     </div>
