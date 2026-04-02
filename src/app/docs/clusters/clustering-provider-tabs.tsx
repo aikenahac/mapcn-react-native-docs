@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { type ReactNode, useState } from "react";
 import { cn } from "@/lib/utils";
 import { DocsCode, DocsLink } from "../_components/docs";
 
@@ -11,7 +11,15 @@ const providers: Array<{ id: Provider; label: string }> = [
   { id: "mapbox", label: "Mapbox" },
 ];
 
-export function ClusteringProviderTabs() {
+type ClusteringProviderTabsProps = {
+  mapLibreExample: ReactNode;
+  mapboxExample: ReactNode;
+};
+
+export function ClusteringProviderTabs({
+  mapLibreExample,
+  mapboxExample,
+}: ClusteringProviderTabsProps) {
   const [activeProvider, setActiveProvider] = useState<Provider>("maplibre");
 
   return (
@@ -36,13 +44,17 @@ export function ClusteringProviderTabs() {
       </div>
 
       <div className="p-5 text-muted-foreground leading-7 space-y-5 [&>ul]:list-disc [&>ul]:pl-6 [&>ul]:space-y-2">
-        {activeProvider === "maplibre" ? <MapLibreContent /> : <MapboxContent />}
+        {activeProvider === "maplibre" ? (
+          <MapLibreContent example={mapLibreExample} />
+        ) : (
+          <MapboxContent example={mapboxExample} />
+        )}
       </div>
     </div>
   );
 }
 
-function MapLibreContent() {
+function MapLibreContent({ example }: { example: ReactNode }) {
   return (
     <>
       <p>
@@ -82,22 +94,30 @@ function MapLibreContent() {
         <li>Style clustered and unclustered output with native layers such as circle and symbol layers.</li>
         <li>Aggregate cluster metadata with <DocsCode>clusterProperties</DocsCode>.</li>
         <li>Respond to taps with source <DocsCode>onPress</DocsCode> and inspect clusters with the cluster query methods above.</li>
+        <li>Tap individual unclustered GeoJSON points and read <DocsCode>event.features[0].properties</DocsCode>.</li>
+        <li>Branch between cluster expansion and point selection in the same source.</li>
+        <li>Trigger app actions like drawers, bottom sheets, modals, or navigation from tapped point properties.</li>
         <li>Render large point datasets more efficiently than many individual <DocsCode>MapMarker</DocsCode> components.</li>
         <li>Use GeoJSON for lines and polygons too, as rendered layers rather than clustered markers.</li>
       </ul>
+
+      <p className="font-medium text-foreground">Minimal example</p>
+      {example}
 
       <p className="font-medium text-foreground">Not possible or not provided here</p>
       <ul>
         <li>No first-class <DocsCode>MapClusterLayer</DocsCode> abstraction in mapcn&apos;s exported API.</li>
         <li>No automatic clustering for <DocsCode>MapMarker</DocsCode> components.</li>
         <li>No clustering for non-point GeoJSON geometries; clustering applies to point shapes.</li>
+        <li>No built-in drawer, modal, bottom sheet, or router abstraction for layer-based GeoJSON points.</li>
         <li>No <DocsCode>MarkerPopup</DocsCode>, <DocsCode>MarkerLabel</DocsCode>, or arbitrary React Native marker subtree inside layer-based clusters.</li>
+        <li>No per-feature React component tree or <DocsCode>MapMarker</DocsCode>-style popup behavior for source-rendered points.</li>
       </ul>
     </>
   );
 }
 
-function MapboxContent() {
+function MapboxContent({ example }: { example: ReactNode }) {
   return (
     <>
       <p>
@@ -134,7 +154,8 @@ function MapboxContent() {
         >
           Earthquakes clustering example
         </DocsLink>
-        .
+        . In a real app, the deep-link example can be swapped for Expo Router
+        or React Navigation.
       </p>
 
       <p className="font-medium text-foreground">Possible with GeoJSON datasets</p>
@@ -143,16 +164,24 @@ function MapboxContent() {
         <li>Style clustered and unclustered output with native layers such as <DocsCode>CircleLayer</DocsCode> and <DocsCode>SymbolLayer</DocsCode>.</li>
         <li>Aggregate cluster metadata with <DocsCode>clusterProperties</DocsCode>.</li>
         <li>Respond to taps with source <DocsCode>onPress</DocsCode> and inspect clusters with <DocsCode>getClusterExpansionZoom</DocsCode>, <DocsCode>getClusterLeaves</DocsCode>, and <DocsCode>getClusterChildren</DocsCode>.</li>
+        <li>Tap individual unclustered GeoJSON points and read <DocsCode>event.features[0].properties</DocsCode>.</li>
+        <li>Branch between cluster expansion and point selection in the same source.</li>
+        <li>Trigger app actions like drawers, bottom sheets, modals, or navigation from tapped point properties.</li>
         <li>Render large point datasets more efficiently than many individual <DocsCode>MapMarker</DocsCode> components.</li>
         <li>Use GeoJSON for lines and polygons too, as rendered layers rather than clustered markers.</li>
       </ul>
+
+      <p className="font-medium text-foreground">Minimal example</p>
+      {example}
 
       <p className="font-medium text-foreground">Not possible or not provided here</p>
       <ul>
         <li>No first-class <DocsCode>MapClusterLayer</DocsCode> abstraction in mapcn&apos;s exported Mapbox API.</li>
         <li>No automatic clustering for <DocsCode>MapMarker</DocsCode> components.</li>
         <li>No clustering for non-point GeoJSON geometries; clustering applies to point shapes.</li>
+        <li>No built-in drawer, modal, bottom sheet, or router abstraction for layer-based GeoJSON points.</li>
         <li>No <DocsCode>MarkerPopup</DocsCode>, <DocsCode>MarkerLabel</DocsCode>, or arbitrary React Native marker subtree inside layer-based clusters.</li>
+        <li>No per-feature React component tree or <DocsCode>MapMarker</DocsCode>-style popup behavior for source-rendered points.</li>
       </ul>
     </>
   );

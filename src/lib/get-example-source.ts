@@ -24,6 +24,9 @@ export function getExampleSource(filename: string): string {
 
   const source = fs.readFileSync(filePath, "utf-8");
 
-  // Clean up the source for display:
-  return source.replace(/@\/registry\/map/g, "@/components/ui/map");
+  // Clean up provider-specific registry imports for display.
+  return source
+    .replace(/@\/registry\/map-mapbox/g, "@/components/ui/map")
+    .replace(/@\/registry\/map-maptiler/g, "@/components/ui/map")
+    .replace(/@\/registry\/map/g, "@/components/ui/map");
 }

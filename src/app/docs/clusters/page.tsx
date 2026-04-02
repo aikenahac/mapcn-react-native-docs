@@ -4,6 +4,8 @@ import {
   DocsCode,
   DocsNote,
 } from "../_components/docs";
+import { CodeBlock } from "../_components/code-block";
+import { getExampleSource } from "@/lib/get-example-source";
 import { Metadata } from "next";
 import { ClusteringProviderTabs } from "./clustering-provider-tabs";
 
@@ -11,7 +13,10 @@ export const metadata: Metadata = {
   title: "Clusters",
 };
 
-export default function ClustersPage() {
+export default async function ClustersPage() {
+  const mapLibreExampleSource = getExampleSource("geojson-tap-maplibre-example");
+  const mapboxExampleSource = getExampleSource("geojson-tap-mapbox-example");
+
   return (
     <DocsLayout
       title="Clusters"
@@ -27,7 +32,12 @@ export default function ClustersPage() {
       </DocsNote>
 
       <DocsSection title="GeoJSON Clustering">
-        <ClusteringProviderTabs />
+        <ClusteringProviderTabs
+          mapLibreExample={
+            <CodeBlock code={mapLibreExampleSource} language="tsx" />
+          }
+          mapboxExample={<CodeBlock code={mapboxExampleSource} language="tsx" />}
+        />
       </DocsSection>
     </DocsLayout>
   );
