@@ -82,7 +82,7 @@ export const metadata: Metadata = {
     "expo maps",
     "react native reusables",
     "shadcn react native",
-    "nativewind maps",
+    "nativewind/unwind maps",
   ],
   openGraph: {
     title: "Installation - mapcn-react-native",
@@ -169,9 +169,9 @@ export default function InstallationPage() {
           </DocsLink>{" "}
           or bare React Native. This component library works best with Expo and requires{" "}
           <DocsLink href="https://www.nativewind.dev/" external>
-            NativeWind
+            NativeWind/Uniwind
           </DocsLink>{" "}
-          for styling.
+          for styling. The component code is the same for both.
         </p>
       </DocsSection>
 

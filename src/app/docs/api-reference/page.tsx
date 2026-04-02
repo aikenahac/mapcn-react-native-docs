@@ -521,9 +521,9 @@ function MyComponent() {
       <DocsSection title="Styling">
         <p>
           All components accept <DocsCode>className</DocsCode> string props for additional
-          styling using Tailwind CSS classes (via NativeWind). This allows easy
-          customization of layout, colors, spacing, and more using utility-first
-          CSS directly in your JSX.
+          styling using Tailwind CSS classes (via NativeWind/Uniwind). The code is
+          the same for both. This allows easy customization of layout, colors,
+          spacing, and more using utility-first CSS directly in your JSX.
         </p>
       </DocsSection>
     </DocsLayout>

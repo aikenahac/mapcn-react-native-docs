@@ -29,21 +29,21 @@ const features = [
 export const metadata: Metadata = {
   title: "Introduction",
   description:
-    "Beautiful, accessible map components for React Native. Built on MapLibre / Mapbox React Native with Nativewind styling and full TypeScript support.",
+    "Beautiful, accessible map components for React Native. Built on MapLibre / Mapbox React Native with NativeWind/Uniwind styling and full TypeScript support.",
   keywords: [
     "react native map components",
     "maplibre react native",
     "mapbox react native",
     "shadcn react native",
     "react native reusables",
-    "nativewind maps",
+    "nativewind/unwind maps",
     "typescript maps",
     "mobile map library",
   ],
   openGraph: {
     title: "Introduction - mapcn-react-native",
     description:
-      "Beautiful, accessible map components for React Native. Built on MapLibre / Mapbox React Native with Nativewind styling and full TypeScript support.",
+      "Beautiful, accessible map components for React Native. Built on MapLibre / Mapbox React Native with NativeWind/Uniwind styling and full TypeScript support.",
     type: "article",
   },
 };
@@ -67,9 +67,10 @@ export default function IntroductionPage() {
           </DocsLink>
           , styled with{" "}
           <DocsLink href="https://www.nativewind.dev/" external>
-            Nativewind
-          </DocsLink>
-          , and designed to work with{" "}
+            NativeWind/Uniwind
+          </DocsLink>{" "}
+          and designed to work with the same component code for both styling
+          libraries, alongside{" "}
           <DocsLink href="https://reactnativereusables.com/" external>
             React Native Reusables (shadcn/ui for React Native)
           </DocsLink>

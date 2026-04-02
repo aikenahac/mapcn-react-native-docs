@@ -10,7 +10,7 @@ This Next.js site documents the React Native version of mapcn. Since React Nativ
 
 - Beautiful, theme-aware map components for React Native
 - Built on @maplibre/maplibre-react-native v11
-- Styled with NativeWind (Tailwind for React Native)
+- Styled with NativeWind/Uniwind (same component code for both)
 - shadcn/ui compatible installation pattern
 - Comprehensive API documentation
 - Screenshot-based interactive examples

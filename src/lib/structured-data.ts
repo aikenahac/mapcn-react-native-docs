@@ -63,11 +63,11 @@ export function getSoftwareApplicationSchema() {
       priceCurrency: "USD",
     },
     description:
-      "A collection of beautifully designed, accessible, and customizable map components for React Native. Built on MapLibre React Native with Tailwind CSS styling via NativeWind.",
+      "A collection of beautifully designed, accessible, and customizable map components for React Native. Built on MapLibre React Native with Tailwind CSS styling via NativeWind/Uniwind.",
     softwareVersion: "1.0.0",
     programmingLanguage: "TypeScript",
     keywords:
-      "react native, maplibre, map components, shadcn, react native reusables, tailwind, nativewind, typescript, mobile maps",
+      "react native, maplibre, map components, shadcn, react native reusables, tailwind, nativewind, uniwind, typescript, mobile maps",
     author: {
       "@type": "Person",
       name: "Aiken Tine Ahac",
