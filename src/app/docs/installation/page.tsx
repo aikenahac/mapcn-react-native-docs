@@ -6,6 +6,7 @@ import {
   DocsSection,
 } from "../_components/docs";
 import { CodeBlock } from "../_components/code-block";
+import { PackageManagerCodeBlock } from "../_components/package-manager-code-block";
 import { Metadata } from "next";
 import { StructuredData } from "@/components/structured-data";
 import {
@@ -16,9 +17,11 @@ import {
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 
-const installMapCode = `npx @react-native-reusables/cli@latest add https://mapcn-rn.dev/maps/map.json`;
-const installMapboxMapCode = `npx @react-native-reusables/cli@latest add https://mapcn-rn.dev/maps/map-mapbox.json`;
-const installMaptilerMapCode = `npx @react-native-reusables/cli@latest add https://mapcn-rn.dev/maps/map-maptiler.json`;
+const installMapCode = `npx mapcn-rn add`;
+const installMapboxMapCode = `npx mapcn-rn add --provider=mapbox`;
+const installMaptilerMapCode = `npx mapcn-rn add --provider=maptiler`;
+const expoRunIosCode = `npx expo run:ios`;
+const expoRunAndroidCode = `npx expo run:android`;
 
 const setupPermissionsExpo = `<!-- app.json -->
 {
@@ -115,7 +118,7 @@ export default function InstallationPage() {
       },
       {
         name: "Install Map Component",
-        text: "Add the map component to your project using the React Native Reusables CLI",
+        text: "Add the map component to your project using the mapcn-rn installer CLI",
       },
       {
         name: "Configure Permissions",
@@ -135,7 +138,7 @@ export default function InstallationPage() {
         title="Installation"
         description="How to install and set up mapcn in your React Native project."
         prev={{ title: "Introduction", href: "/docs" }}
-        next={{ title: "Commercial use", href: "/docs/commercial-use" }}
+        next={{ title: "CLI", href: "/docs/cli" }}
       >
       <DocsNote>
         <strong>Beta Version:</strong> This library requires{" "}
@@ -155,11 +158,17 @@ export default function InstallationPage() {
         >
           development build
         </DocsLink>
-        . They will not work with Expo Go. Run{" "}
-        <DocsCode>npx expo run:ios</DocsCode> or{" "}
-        <DocsCode>npx expo run:android</DocsCode> to build and run on a simulator
-        or device.
+        . They will not work with Expo Go.
       </DocsNote>
+
+      <DocsSection title="Run a development build">
+        <p>
+          Use a development build to run the native map SDK on a simulator or
+          device.
+        </p>
+        <PackageManagerCodeBlock command={expoRunIosCode} />
+        <PackageManagerCodeBlock command={expoRunAndroidCode} />
+      </DocsSection>
 
       <DocsSection title="Prerequisites">
         <p>
@@ -192,7 +201,7 @@ export default function InstallationPage() {
           <li>using maplibre with maptiler maps (free tier - pay after reaching limit)</li>
         </ul>
         <h2 className="font-bold text-lg">Install CARTO Basemaps-based map:</h2>
-        <CodeBlock code={installMapCode} language="bash" />
+        <PackageManagerCodeBlock command={installMapCode} />
 
         <div className="flex flex-row items-center justify-between gap-2">
           <h2 className="font-bold text-lg">Install mapbox-based map:</h2>
@@ -200,7 +209,7 @@ export default function InstallationPage() {
             <Link href="/docs/commercial-use">Additionial setup</Link>
           </Badge>
         </div>
-        <CodeBlock code={installMapboxMapCode} language="bash" />
+        <PackageManagerCodeBlock command={installMapboxMapCode} />
 
         <div className="flex flex-row items-center justify-between gap-2">
           <h2 className="font-bold text-lg">Install maptiler-based map:</h2>
@@ -208,7 +217,7 @@ export default function InstallationPage() {
             <Link href="/docs/commercial-use">Additionial setup</Link>
           </Badge>
         </div>
-        <CodeBlock code={installMaptilerMapCode} language="bash" />
+        <PackageManagerCodeBlock command={installMaptilerMapCode} />
         <p>
           This will add the map component to{" "}
           <DocsCode>components/ui/map.tsx</DocsCode> in your project.
@@ -216,6 +225,10 @@ export default function InstallationPage() {
 
         <p>
           Check out the <DocsLink href="/docs/commercial-use">commercial use page</DocsLink> for more information and additional setup steps.
+        </p>
+        <p>
+          For the full wrapper CLI flow, including provider selection, see the{" "}
+          <DocsLink href="/docs/cli">CLI page</DocsLink>.
         </p>
       </DocsSection>
 

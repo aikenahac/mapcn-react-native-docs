@@ -1,17 +1,15 @@
 import { DocsCode, DocsLink, DocsNote, DocsSection } from "./docs";
 import { CodeBlock } from "./code-block";
+import { PackageManagerCodeBlock } from "./package-manager-code-block";
 
 interface SourceInstallationProps {
   variant: "default" | "maptiler" | "mapbox";
 }
 
 const installCommands = {
-  default:
-    "npx @react-native-reusables/cli@latest add https://mapcn-rn.dev/maps/map.json",
-  maptiler:
-    "npx @react-native-reusables/cli@latest add https://mapcn-rn.dev/maps/map-maptiler.json",
-  mapbox:
-    "npx @react-native-reusables/cli@latest add https://mapcn-rn.dev/maps/map-mapbox.json",
+  default: "npx mapcn-rn add",
+  maptiler: "npx mapcn-rn add --provider=maptiler",
+  mapbox: "npx mapcn-rn add --provider=mapbox",
 };
 
 const dependencies = {
@@ -130,10 +128,11 @@ export async function SourceInstallation({ variant }: SourceInstallationProps) {
 
       <DocsSection title="Install via CLI">
         <p>
-          If you just want the generated file in your app, use the React Native Reusables CLI.
-          It writes the component to <DocsCode>components/ui/map.tsx</DocsCode> for you.
+          If you just want the generated file in your app, use{" "}
+          <DocsCode>mapcn-rn</DocsCode>. It resolves the right registry entry and
+          writes the component to <DocsCode>components/ui/map.tsx</DocsCode> for you.
         </p>
-        <CodeBlock code={installCommands[variant]} language="bash" />
+        <PackageManagerCodeBlock command={installCommands[variant]} />
       </DocsSection>
 
       <DocsSection title="Required dependencies">
@@ -141,7 +140,7 @@ export async function SourceInstallation({ variant }: SourceInstallationProps) {
           If you are copying the source manually instead of using the CLI, install the runtime
           packages first.
         </p>
-        <CodeBlock code={dependencies[variant]} language="bash" />
+        <PackageManagerCodeBlock command={dependencies[variant]} />
       </DocsSection>
 
       {(variant === "maptiler" || variant === "mapbox") && (

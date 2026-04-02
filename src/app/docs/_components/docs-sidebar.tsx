@@ -16,6 +16,7 @@ import {
   Smartphone,
   DollarSign,
   FileCode2,
+  Terminal,
 } from "lucide-react";
 
 import {
@@ -37,6 +38,7 @@ const navigation = [
     items: [
       { title: "Getting Started", href: "/docs", icon: BookOpen },
       { title: "Installation", href: "/docs/installation", icon: Code },
+      { title: "CLI", href: "/docs/cli", icon: Terminal },
       { title: "Commercial use", href: "/docs/commercial-use", icon: DollarSign },
       {
         title: "API Reference",

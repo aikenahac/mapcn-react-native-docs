@@ -7,6 +7,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "",
     "/docs",
     "/docs/installation",
+    "/docs/cli",
     "/docs/commercial-use",
     "/docs/basic-map",
     "/docs/markers",

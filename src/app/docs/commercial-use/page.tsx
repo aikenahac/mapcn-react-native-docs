@@ -5,10 +5,11 @@ import {
   DocsSection,
 } from "../_components/docs";
 import { CodeBlock } from "../_components/code-block";
+import { PackageManagerCodeBlock } from "../_components/package-manager-code-block";
 import { Metadata } from "next";
 
-const installMapboxMapCode = `npx @react-native-reusables/cli@latest add https://mapcn-rn.dev/maps/map-mapbox.json`;
-const installMaptilerMapCode = `npx @react-native-reusables/cli@latest add https://mapcn-rn.dev/maps/map-maptiler.json`;
+const installMapboxMapCode = `npx mapcn-rn add --provider=mapbox`;
+const installMaptilerMapCode = `npx mapcn-rn add --provider=maptiler`;
 
 const mapboxApiKeyCode = `# .env
 EXPO_PUBLIC_MAPBOX_API_KEY=pk...
@@ -27,7 +28,7 @@ export default function InstallationPage() {
     <DocsLayout
       title="Commercial use"
       description="How to setup your project for commercial use."
-      prev={{ title: "Installation", href: "/docs/installation" }}
+      prev={{ title: "CLI", href: "/docs/cli" }}
       next={{ title: "API Reference", href: "/docs/api-reference" }}
     >
       <DocsSection title="CARTO Basemaps">
@@ -36,7 +37,7 @@ export default function InstallationPage() {
 
       <DocsSection title="Mapbox based component">
         <p>Run the following command to add the mapbox-based map component:</p>
-        <CodeBlock code={installMapboxMapCode} language="bash" />
+        <PackageManagerCodeBlock command={installMapboxMapCode} />
 
         <p>Get a Mapbox API key from <DocsLink href="https://console.mapbox.com/account/access-tokens" external>console.mapbox.com/account/access-token</DocsLink>.</p>
 
@@ -57,7 +58,7 @@ export default function InstallationPage() {
 
       <DocsSection title="Maptiler based component">
         <p>Run the following command to add the map component:</p>
-        <CodeBlock code={installMaptilerMapCode} language="bash" />
+        <PackageManagerCodeBlock command={installMaptilerMapCode} />
 
         <p>Get a Maptiler API key from the <DocsLink href="https://cloud.maptiler.com/account/keys" external>Maptiler</DocsLink> website.</p>
 
