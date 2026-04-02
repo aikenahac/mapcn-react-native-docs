@@ -16,6 +16,7 @@ export async function ComponentPreview({
   qrCodeName,
 }: ComponentPreviewProps) {
   const highlightedCode = await highlightCode(code, "tsx");
+  const CDN_URL = process.env.NEXT_PUBLIC_BUNNY_CDN_URL;
 
   return (
     <ComponentPreviewClient
@@ -24,6 +25,7 @@ export async function ComponentPreview({
       className={className}
       screenshotName={screenshotName}
       qrCodeName={qrCodeName}
+      cdnUrl={CDN_URL}
     />
   );
 }

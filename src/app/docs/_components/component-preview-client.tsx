@@ -12,6 +12,7 @@ interface ComponentPreviewClientProps {
   className?: string;
   screenshotName?: string; // Name of screenshot file in /public/screenshots/
   qrCodeName?: string; // Name of QR code file in /public/qr/
+  cdnUrl?: string;
 }
 
 export function ComponentPreviewClient({
@@ -20,10 +21,9 @@ export function ComponentPreviewClient({
   className,
   screenshotName,
   qrCodeName,
+  cdnUrl,
 }: ComponentPreviewClientProps) {
   const [activeTab, setActiveTab] = useState<"preview" | "code" | "qr">("preview");
-
-  const CDN_URL = process.env.NEXT_PUBLIC_BUNNY_CDN_URL;
 
   return (
     <div className="w-full rounded-lg border overflow-hidden">
@@ -74,7 +74,7 @@ export function ComponentPreviewClient({
           <div className="h-full bg-muted/10 flex items-center justify-center">
             {screenshotName ? (
               <Image
-                src={`${CDN_URL}/screenshots/${screenshotName}`}
+                src={`${cdnUrl}/screenshots/${screenshotName}`}
                 alt="Map example screenshot"
                 width={800}
                 height={400}
@@ -97,7 +97,7 @@ export function ComponentPreviewClient({
             {qrCodeName ? (
               <div className="flex flex-col items-center gap-4">
                 <Image
-                  src={`${CDN_URL}/qr/${qrCodeName}`}
+                  src={`${cdnUrl}/qr/${qrCodeName}`}
                   alt="QR code to example"
                   width={300}
                   height={300}
